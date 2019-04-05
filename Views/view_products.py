@@ -23,10 +23,5 @@ def add_products():
     products = Product.all_products
     parts = Parts.all_parts
     new_products = request.json
-    last_id = len(Parts.all_parts) + 1
-    for part in parts:
-        single_part = Part(last_id, part['name'], part['childs'])
-        Parts.addPart(part)
-    resp = jsonify({"parts": Parts.all_parts})
-    resp.status_code = 201
-    return resp
+    products.append(new_products)
+    return jsonify({"parts": products})
