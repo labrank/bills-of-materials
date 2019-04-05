@@ -18,3 +18,18 @@ class Parts:
     def deletePart(name):
         elements = Parts.all_parts
         elements[:] = [d for d in elements if d.get('name') != name]
+
+
+class Product:
+    all_products = []
+
+    def addProduct(Parts):
+        elements = Product.all_products
+        if any(element['name'] == Part['name'] for element in elements):
+            return elements
+        elements.append(Part)
+        return elements
+
+    def deletePart(name):
+        elements = Parts.all_parts
+        elements[:] = [d for d in elements if d.get('name') != name]

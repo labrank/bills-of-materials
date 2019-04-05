@@ -1,12 +1,14 @@
 from flask import Flask
 
-from Views.parts.parts_view import parts
-# from Views.parts.assemblies_view import assemblies
+from Views.view_assemblies import assemblies
+from Views.view_parts import parts
+from Views.view_products import products
 
 app = Flask(__name__)
 
 app.register_blueprint(parts)
-# app.register_blueprint(assemblies)
+app.register_blueprint(assemblies)
+app.register_blueprint(products)
 
 @app.route('/')
 def hello():
