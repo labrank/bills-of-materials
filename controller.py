@@ -1,18 +1,20 @@
-class Parts:
-    all_parts = {1:"part1"}
+class Part:
+    def __init__(self, id, name, childs):
+        self.id = id
+        self.name = name
+        self.childs = childs
 
-    def addPart(name):
+
+class Parts:
+    all_parts = []
+
+    def addPart(Part):
         elements = Parts.all_parts
-        if(name in elements.values()):
+        if any(element['name'] == Part['name'] for element in elements):
             return elements
-        elements[len(elements) + 1] = name
+        elements.append(Part)
         return elements
 
     def deletePart(name):
         elements = Parts.all_parts
-        for key, value in elements.items():
-            if value == name:
-                del elements[key]
-                return 'ok'
-            else:
-                raise Exception('Element does not exist')
+        elements[:] = [d for d in elements if d.get('name') != name]
