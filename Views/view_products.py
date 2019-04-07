@@ -20,8 +20,34 @@ def get_product(name):
 
 @products.route('/product', methods=['POST'])
 def add_products():
+    unique_products = set()
+    unique_elements = set()
     products = Product.all_products
     parts = Parts.all_parts
-    new_products = request.json
+    new_products = request.json#['product']#['parts']
+    for item in parts:
+        unique_products.add(item['name'])
+
+    print('-'*10)
+    def childToSet(d):
+        if isinstance(d, dict):
+            for key, value in d.items():
+                if isinstance(value, (dict, list)):
+                    childToSet(value)
+                else:
+                    unique_elements.add(value)
+        elif isinstance(d, list):
+            for item in d:
+                if isinstance(item, (dict, list)):
+                    childToSet(item)
+                unique_elements.add(item['name'])
+        else:
+            unique_elements.add(d['name'])
+
+    childToSet(new_products)
+    print('lista final:')
+    print(unique_elements)
     products.append(new_products)
-    return jsonify({"parts": products})
+
+
+    return jsonify({"products": products})
