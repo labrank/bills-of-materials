@@ -34,9 +34,6 @@ def add_products():
     if any(d['product']['name'] ==
            new_product['product']['name'] for d in products):
         return jsonify({"error": "product already exist"})
-        
-    for prod in new_product:
-        print(prod[1])
 
     # a set of all existing parts
     for item in parts:
@@ -59,6 +56,7 @@ def add_products():
             unique_elements.add(d['name'])
 
     findPartsOnProduct(new_product)
+
     # Verify if all the parts exist using sets
     if len(unique_elements.difference(unique_products)) == 0:
         products.append(new_product)
