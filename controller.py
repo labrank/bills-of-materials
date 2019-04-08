@@ -8,28 +8,32 @@ class Part:
 class Parts:
     all_parts = []
 
-    def addPart(Part):
+    def addPart(single_part):
         elements = Parts.all_parts
-        if any(element['name'] == Part['name'] for element in elements):
+        name = single_part['name']
+        exist = next((item for item in elements if item['name'] ==
+                      name), None)
+        if exist:
             return elements
-        elements.append(Part)
-        return elements
+        elements.append(single_part)
+        return single_part
 
     def deletePart(name):
         elements = Parts.all_parts
-        elements[:] = [d for d in elements if d.get('name') != name]
+        elements[:] = [d for d in elements if d['name'] != name]
 
 
 class Product:
     all_products = []
 
-    def addProduct(Parts):
+    def addProduct(single_product):
         elements = Product.all_products
-        if any(element['name'] == Part['name'] for element in elements):
+
+        if any(element['name'] == single_product['name'] for element in elements):
             return elements
-        elements.append(Part)
+        elements.append(single_product)
         return elements
 
-    def deletePart(name):
-        elements = Parts.all_parts
-        elements[:] = [d for d in elements if d.get('name') != name]
+    def deleteProduct(name):
+        elements = Product.all_products
+        elements[:] = [d for d in elements if d['name'] != name]
